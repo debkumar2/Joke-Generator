@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Joke</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Dad Joke</h1>
+        <div class="api-body"></div>
+        <button id="fetchJoke">Get Another Joke</button>
+    </div>
+    <script>
+        const apiBody = document.querySelector('.api-body');
+        const apiURL = 'https://icanhazdadjoke.com/';
+        const fetchData = () => {
+            fetch(apiURL, {
+                headers: {
+                    Accept: 'application/json',
+                },
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    apiBody.innerHTML = data.joke;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+        document.querySelector('#fetchJoke').addEventListener('click', fetchData);
+    </script>
+</body>
+
+</html>
